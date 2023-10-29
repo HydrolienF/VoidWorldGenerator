@@ -1,9 +1,9 @@
-name: VoidWorldGenerator
-version: 1.0.0
-main: fr.formiko.voidworldgenerator.VoidWorldGenerator
-description: Generate empty world
+name: $name
+version: $version
+main: $group.${name}Plugin
+description: $description
 author: Hydrolien
-website: https://github.com/HydrolienF/VoidWorldGenerator
-api-version: '1.20'
+website: https://github.com/HydrolienF/$name
+api-version: "$apiVersion"
 folia-supported: true
 load: STARTUP

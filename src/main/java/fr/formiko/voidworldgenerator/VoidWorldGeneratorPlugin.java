@@ -3,6 +3,7 @@ package fr.formiko.voidworldgenerator;
 import java.util.List;
 import java.util.Random;
 import javax.annotation.Nullable;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Biome;
@@ -16,7 +17,10 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Generate empty chunks with biome THE_VOID.
  */
-public class VoidWorldGenerator extends JavaPlugin {
+public class VoidWorldGeneratorPlugin extends JavaPlugin {
+    @Override
+    public void onEnable() { new Metrics(this, 20171); }
+
     @Override
     public ChunkGenerator getDefaultWorldGenerator(String worldName, String id) { return new VoidChunkGenerator(); }
 
