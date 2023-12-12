@@ -7,7 +7,7 @@ plugins {
 }
 
 group="fr.formiko.voidworldgenerator"
-version="1.1.0"
+version="1.1.1"
 description="Generate empty world."
 
 repositories {
@@ -30,6 +30,9 @@ tasks {
     shadowJar {
         relocate("org.bstats","${project.group}.bstats")
         archiveFileName.set("${project.name}-${project.version}.jar")
+    }
+    assemble {
+        dependsOn(shadowJar)
     }
     compileJava {
         options.encoding = Charsets.UTF_8.name() // We want UTF-8 for everything
