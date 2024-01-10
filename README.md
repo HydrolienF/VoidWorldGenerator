@@ -18,3 +18,6 @@ worlds:
 
 # Build
 Run `./gradlew assemble`
+
+## Statistics
+[![bStats Graph Data](https://bstats.org/signatures/bukkit/VoidWorldGenerator.svg)](https://bstats.org/plugin/bukkit/VoidWorldGenerator/20171)
