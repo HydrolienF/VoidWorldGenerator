@@ -1,5 +1,14 @@
+[download]: https://img.shields.io/github/downloads/HydrolienF/VoidWorldGenerator/total
+[downloadLink]: https://hangar.papermc.io/Hydrolien/VoidWorldGenerator
+[discord-shield]: https://img.shields.io/discord/728592434577014825?label=discord
+[discord-invite]: https://discord.gg/RPNbtRSFqG
+
+
 # VoidWorldGenerator
 A simple minecraft plugin to generate a void world.
+
+[ ![download][] ][downloadLink]
+[ ![discord-shield][] ][discord-invite]
 
 Compatible with `Paper`, `Spigot` & `Folia` in `1.20, 1.20.1, 1.20.2, 1.20.3, 1.20.4`.
 
