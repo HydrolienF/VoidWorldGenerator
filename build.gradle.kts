@@ -1,13 +1,11 @@
-import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-
 plugins {
     id("java")
-    id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("io.github.goooler.shadow") version "8.1.7"
     id("maven-publish")
 }
 
 group="fr.formiko.voidworldgenerator"
-version="1.1.1"
+version="1.1.2"
 description="Generate empty world."
 
 repositories {
@@ -17,7 +15,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.20.2-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT") // Not explicily set to 1.20.6 because it's doesn't have a stable release yet, but work with 1.20.6
     implementation("org.bstats:bstats-bukkit:3.0.2")
 }
 

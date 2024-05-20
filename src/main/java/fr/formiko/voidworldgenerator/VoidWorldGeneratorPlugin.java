@@ -46,21 +46,6 @@ public class VoidWorldGeneratorPlugin extends JavaPlugin {
         @Nullable
         public BiomeProvider getDefaultBiomeProvider(@NotNull WorldInfo worldInfo) { return new VoidBiomeProvider(); }
 
-        // @Override
-        // public ChunkData generateChunkData(World world, Random random, int chunkX, int chunkZ, BiomeGrid biome) {
-        // ChunkData chunkData = super.createChunkData(world);
-
-        // // Set biome.
-        // for (int x = 0; x < 16; x++) {
-        // for (int z = 0; z < 16; z++) {
-        // biome.setBiome(x, z, Biome.PLAINS);
-        // }
-        // }
-
-        // // Return the new chunk data.
-        // return chunkData;
-        // }
-
         @Override
         public boolean canSpawn(World world, int x, int z) { return true; }
 
