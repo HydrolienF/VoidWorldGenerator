@@ -2,10 +2,12 @@ plugins {
     id("java")
     id("io.github.goooler.shadow") version "8.1.7"
     id("maven-publish")
+    id("xyz.jpenilla.run-paper") version "2.3.0"
+    id("org.sonarqube") version "5.0.0.4638"
 }
 
 group="fr.formiko.voidworldgenerator"
-version="1.1.2"
+version="1.1.3"
 description="Generate empty world."
 
 repositories {
@@ -15,13 +17,12 @@ repositories {
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT") // Not explicily set to 1.20.6 because it's doesn't have a stable release yet, but work with 1.20.6
+    compileOnly("io.papermc.paper:paper-api:1.20.6-R0.1-SNAPSHOT")
     implementation("org.bstats:bstats-bukkit:3.0.2")
 }
 
 java {
-  // Configure the java toolchain. This allows gradle to auto-provision JDK 17 on systems that only have JDK 8 installed for example.
-  toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+    toolchain.languageVersion.set(JavaLanguageVersion.of(21))
 }
 
 tasks {
@@ -32,15 +33,7 @@ tasks {
     assemble {
         dependsOn(shadowJar)
     }
-    compileJava {
-        options.encoding = Charsets.UTF_8.name() // We want UTF-8 for everything
-        options.release.set(17) // See https://openjdk.java.net/jeps/247 for more information.
-    }
-    javadoc {
-        options.encoding = Charsets.UTF_8.name() // We want UTF-8 for everything
-    }
     processResources {
-        filteringCharset = Charsets.UTF_8.name() // We want UTF-8 for everything
         val props = mapOf(
             "name" to project.name,
             "version" to project.version,
@@ -52,5 +45,17 @@ tasks {
         filesMatching("plugin.yml") {
             expand(props)
         }
+    }
+    runServer {
+        // Configure the Minecraft version for our task.
+        // This is the only required configuration besides applying the plugin.
+        // Your plugin's jar (or shadowJar if present) will be used automatically.
+        minecraftVersion("1.21")
+    }
+}
+
+publishing {
+    publications.create<MavenPublication>("maven") {
+        from(components["java"])
     }
 }
