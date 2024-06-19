@@ -16,8 +16,10 @@ It can be used to prevent world generation outside of the world border.
 To prevent that fully generate your world with a plugin as [Chunky](https://www.spigotmc.org/resources/chunky.81534/) then add this plugin & configure your bukkit.yml.
 
 # Installation
-Download last .jar on https://github.com/HydrolienF/VoidWorldGenerator/releases
-Place the .jar in `plugins/`
+Download last .jar on [releases tab](https://github.com/HydrolienF/VoidWorldGenerator/releases).
+
+Place the .jar in `plugins/`.
+
 Add next lines at the begining of bukkit.yml:
 ```yml
 worlds:
