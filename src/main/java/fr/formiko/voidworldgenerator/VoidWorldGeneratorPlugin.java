@@ -31,16 +31,24 @@ public class VoidWorldGeneratorPlugin extends JavaPlugin {
 
         @Override
         public void generateNoise(@NotNull WorldInfo worldInfo, @NotNull Random random, int chunkX, int chunkZ,
-                @NotNull ChunkData chunkData) {}
+                @NotNull ChunkData chunkData) {
+                    // No need to generate noise, we want an empty world
+                }
         @Override
         public void generateSurface(@NotNull WorldInfo worldInfo, @NotNull Random random, int chunkX, int chunkZ,
-                @NotNull ChunkData chunkData) {}
+                @NotNull ChunkData chunkData) {
+                    // No need to generate surface, we want an empty world
+                }
         @Override
         public void generateBedrock(@NotNull WorldInfo worldInfo, @NotNull Random random, int chunkX, int chunkZ,
-                @NotNull ChunkData chunkData) {}
+                @NotNull ChunkData chunkData) {
+                    // No need to generate bedrock, we want an empty world
+                }
         @Override
         public void generateCaves(@NotNull WorldInfo worldInfo, @NotNull Random random, int chunkX, int chunkZ,
-                @NotNull ChunkData chunkData) {}
+                @NotNull ChunkData chunkData) {
+                    // No need to generate caves, we want an empty world
+                }
 
         @Override
         @Nullable
