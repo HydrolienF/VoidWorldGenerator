@@ -9,7 +9,7 @@
 # VoidWorldGenerator
 A simple minecraft plugin to generate a void world.
 
-Compatible with `Paper`, `Spigot` & `Folia` in `1.20, 1.20.1, 1.20.2, 1.20.3, 1.20.4, 1.20.5, 1.20.6, 1.21`.
+Compatible with `Paper`, `Spigot` & `Folia` in `1.20, 1.20.1, 1.20.2, 1.20.3, 1.20.4, 1.20.5, 1.20.6, 1.21, 1.21.1, 1.21.2, 1.21.3`.
 1.1.2 is the last Java 17 compatible version. Update to [Java 21](https://adoptium.net/temurin/releases/?version=21) or use [1.1.2](https://github.com/HydrolienF/VoidWorldGenerator/releases/tag/1.1.2).
 
 It can be used to prevent world generation outside of the world border.

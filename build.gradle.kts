@@ -7,7 +7,7 @@ plugins {
 }
 
 group="fr.formiko.voidworldgenerator"
-version="1.1.4"
+version="1.1.5"
 description="Generate empty world."
 
 repositories {
