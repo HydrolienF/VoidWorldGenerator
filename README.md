@@ -6,7 +6,7 @@
 [ ![download][] ][downloadLink]
 [ ![discord-shield][] ][discord-invite]
 
-[**Discord**](discord-invite) | [**Hangar**](https://hangar.papermc.io/Hydrolien/VoidWorldGenerator) | [**Spigot**](https://www.spigotmc.org/resources/voidworldgenerator.113931/) | [**GitHub**](https://github.com/Hydrolien/VoidWorldGenerator)
+[**Discord**](discord-invite) | [**Hangar**](https://hangar.papermc.io/Hydrolien/VoidWorldGenerator) | [**Spigot**](https://www.spigotmc.org/resources/voidworldgenerator.113931/) | [**GitHub**](https://github.com/HydrolienF/VoidWorldGenerator)
 
 # VoidWorldGenerator
 A simple minecraft plugin to generate a void world.
