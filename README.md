@@ -19,10 +19,10 @@ To prevent that fully generate your world with a plugin as [Chunky](https://www.
 - **Discord**: https://discord.gg/RPNbtRSFqG
 - **Hangar**: https://hangar.papermc.io/Hydrolien/VoidWorldGenerator
 - **Spigot**: https://www.spigotmc.org/resources/voidworldgenerator.113931/
-- **Source code**: https://github.com/Hydrolien/VoidWorldGenerator
+- **GitHub**: https://github.com/Hydrolien/VoidWorldGenerator
 
 # Installation
-Download last .jar on [releases tab](https://github.com/HydrolienF/VoidWorldGenerator/releases).
+Download latest .jar on [releases tab](https://github.com/HydrolienF/VoidWorldGenerator/releases).
 
 Place the .jar in `plugins/`.
 
@@ -32,6 +32,8 @@ worlds:
   world:
     generator: VoidWorldGenerator
 ```
+
+If your world is not called `world`, replace `world` by your world name. You can set VoidWorldGenerator as generator for more than 1 world.
 
 ## Statistics
 [![bStats Graph Data](https://bstats.org/signatures/bukkit/VoidWorldGenerator.svg)](https://bstats.org/plugin/bukkit/VoidWorldGenerator/20171)
