@@ -2,12 +2,12 @@ plugins {
     id("java")
     id("io.github.goooler.shadow") version "8.1.7"
     id("maven-publish")
-    id("xyz.jpenilla.run-paper") version "2.3.0"
+    id("xyz.jpenilla.run-paper") version "2.3.1"
     id("org.sonarqube") version "5.0.0.4638"
 }
 
 group="fr.formiko.voidworldgenerator"
-version="1.1.3"
+version="1.1.4"
 description="Generate empty world."
 
 repositories {
@@ -17,7 +17,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.20.6-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:1.21.3-R0.1-SNAPSHOT")
     implementation("org.bstats:bstats-bukkit:3.0.2")
 }
 
@@ -50,7 +50,7 @@ tasks {
         // Configure the Minecraft version for our task.
         // This is the only required configuration besides applying the plugin.
         // Your plugin's jar (or shadowJar if present) will be used automatically.
-        minecraftVersion("1.21")
+        minecraftVersion("1.21.3")
     }
 }
 
