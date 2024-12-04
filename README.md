@@ -38,7 +38,7 @@ worlds:
     generator: VoidWorldGenerator
 ```
 
-You can set the biome to use for empty chunks & the default spawn coordinates in the plugin config in `plugins/VoidWorldGenerator/config.yml`.
+Biome to use for empty chunks & the default spawn coordinates can be edit in the plugin config in `plugins/VoidWorldGenerator/config.yml`.
 
 ## Statistics
 [![bStats Graph Data](https://bstats.org/signatures/bukkit/VoidWorldGenerator.svg)](https://bstats.org/plugin/bukkit/VoidWorldGenerator/20171)
