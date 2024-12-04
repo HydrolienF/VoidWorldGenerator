@@ -1,0 +1,9 @@
+# The biome to use for empty chunks. This biome will be used for chunks that have not been generated yet.
+# Accepted value can be found there: https://jd.papermc.io/paper/1.21.3/org/bukkit/block/Biome.html
+emptyChunkBiome: "THE_VOID"
+
+# Coordinates of the spawn point
+spawn:
+  x: 0
+  y: 64
+  z: 0
