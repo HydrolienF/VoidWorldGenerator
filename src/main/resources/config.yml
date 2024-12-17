@@ -1,9 +1,23 @@
-# The biome to use for empty chunks. This biome will be used for chunks that have not been generated yet.
-# Accepted value can be found there: https://jd.papermc.io/paper/1.21.3/org/bukkit/block/Biome.html
-emptyChunkBiome: "THE_VOID"
+# Empty chunk biome is set only since 1.20.6, for older version it is always set to "THE_VOID".
 
-# Coordinates of the spawn point
-spawn:
-  x: 0
-  y: 64
-  z: 0
+# Configuration for a custom world
+worlds:
+  # Default configuration for every world that does not have a specific configuration.
+  '*':
+    # The biome to use for empty chunks. This biome will be used for chunks that have not been generated yet.
+    # Accepted value can be found there: https://jd.papermc.io/paper/1.21.3/org/bukkit/block/Biome.html (Replace 1.21.3 with your server version in the URL)
+    emptyChunkBiome: "THE_VOID"
+
+    # Coordinates of the spawn point
+    spawn:
+      x: 0
+      y: 64
+      z: 0
+
+  # Specific configuration for the "aCustomWorld" world.
+  # aCustomWorld:
+  #   emptyChunkBiome: "DRIPSTONE_CAVES"
+  #   spawn:
+  #     x: 100
+  #     y: 64
+  #     z: 30

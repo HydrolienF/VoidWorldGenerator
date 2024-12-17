@@ -5,7 +5,6 @@ import java.util.Random;
 import javax.annotation.Nullable;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Location;
-import org.bukkit.NamespacedKey;
 import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.generator.BiomeProvider;
@@ -14,36 +13,27 @@ import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.generator.WorldInfo;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
-import io.papermc.paper.registry.RegistryAccess;
-import io.papermc.paper.registry.RegistryKey;
 
 /**
  * Generate empty chunks with the config biome.
  */
 public class VoidWorldGeneratorPlugin extends JavaPlugin {
-    private static Biome EMPTY_CHUNK_BIOME;
+    private ConfigSettings configSettings;
     @Override
     public void onEnable() {
         new Metrics(this, 20171);
         saveDefaultConfig();
-        try {
-            EMPTY_CHUNK_BIOME = RegistryAccess.registryAccess().getRegistry(RegistryKey.BIOME)
-                    .get(NamespacedKey.minecraft(getConfig().getString("emptyChunkBiome", "the_void").toLowerCase()));
-        }catch (Exception e) {
-            EMPTY_CHUNK_BIOME = null;
-        }
-        if(EMPTY_CHUNK_BIOME == null) {
-            getLogger().warning("Biome not found, using THE_VOID");
-            EMPTY_CHUNK_BIOME = Biome.THE_VOID;
-        } else {
-            getLogger().info("Using biome " + EMPTY_CHUNK_BIOME.getKey().getKey());
-        }
+        configSettings = new ConfigSettings();
     }
 
+    public static VoidWorldGeneratorPlugin getInstance() { return getPlugin(VoidWorldGeneratorPlugin.class); }
+
     @Override
-    public ChunkGenerator getDefaultWorldGenerator(String worldName, String id) { return new VoidChunkGenerator(); }
+    public ChunkGenerator getDefaultWorldGenerator(String worldName, String id) { return new VoidChunkGenerator(worldName); }
 
     private class VoidChunkGenerator extends ChunkGenerator {
+        private final String worldName;
+        private VoidChunkGenerator(String worldName) { this.worldName = worldName; }
 
         @Override
         public List<BlockPopulator> getDefaultPopulators(World world) { return List.of(); }
@@ -71,23 +61,25 @@ public class VoidWorldGeneratorPlugin extends JavaPlugin {
 
         @Override
         @Nullable
-        public BiomeProvider getDefaultBiomeProvider(@NotNull WorldInfo worldInfo) { return new VoidBiomeProvider(); }
+        public BiomeProvider getDefaultBiomeProvider(@NotNull WorldInfo worldInfo) { return new VoidBiomeProvider(worldName); }
 
         @Override
         public boolean canSpawn(World world, int x, int z) { return true; }
 
         @Override
         public Location getFixedSpawnLocation(World world, Random random) {
-            return new Location(world, getConfig().getInt("spawn.x", 0), getConfig().getInt("spawn.y", 64), getConfig().getInt("spawn.z", 0));
+            return new Location(world, configSettings.getSpawnX(worldName), configSettings.getSpawnY(worldName), configSettings.getSpawnZ(worldName));
         }
     }
     private class VoidBiomeProvider extends BiomeProvider {
+        private final String worldName;
+        private VoidBiomeProvider(String worldName) { this.worldName = worldName; }
 
         @Override
-        public @NotNull Biome getBiome(@NotNull WorldInfo worldInfo, int x, int y, int z) { return EMPTY_CHUNK_BIOME; }
+        public @NotNull Biome getBiome(@NotNull WorldInfo worldInfo, int x, int y, int z) { return configSettings.getBiome(worldName); }
 
         @Override
-        public @NotNull List<Biome> getBiomes(@NotNull WorldInfo worldInfo) { return List.of(EMPTY_CHUNK_BIOME); }
+        public @NotNull List<Biome> getBiomes(@NotNull WorldInfo worldInfo) { return List.of(configSettings.getBiome(worldName)); }
 
     }
 }
