@@ -1,4 +1,4 @@
-package fr.formiko.voidworldgenerator;
+package fr.formiko.mc.voidworldgenerator;
 
 import java.util.List;
 import java.util.Random;
@@ -41,23 +41,23 @@ public class VoidWorldGeneratorPlugin extends JavaPlugin {
         @Override
         public void generateNoise(@NotNull WorldInfo worldInfo, @NotNull Random random, int chunkX, int chunkZ,
                 @NotNull ChunkData chunkData) {
-                    // No need to generate noise, we want an empty world
-                }
+            // No need to generate noise, we want an empty world
+        }
         @Override
         public void generateSurface(@NotNull WorldInfo worldInfo, @NotNull Random random, int chunkX, int chunkZ,
                 @NotNull ChunkData chunkData) {
-                    // No need to generate surface, we want an empty world
-                }
+            // No need to generate surface, we want an empty world
+        }
         @Override
         public void generateBedrock(@NotNull WorldInfo worldInfo, @NotNull Random random, int chunkX, int chunkZ,
                 @NotNull ChunkData chunkData) {
-                    // No need to generate bedrock, we want an empty world
-                }
+            // No need to generate bedrock, we want an empty world
+        }
         @Override
         public void generateCaves(@NotNull WorldInfo worldInfo, @NotNull Random random, int chunkX, int chunkZ,
                 @NotNull ChunkData chunkData) {
-                    // No need to generate caves, we want an empty world
-                }
+            // No need to generate caves, we want an empty world
+        }
 
         @Override
         @Nullable
@@ -68,7 +68,8 @@ public class VoidWorldGeneratorPlugin extends JavaPlugin {
 
         @Override
         public Location getFixedSpawnLocation(World world, Random random) {
-            return new Location(world, configSettings.getSpawnX(worldName), configSettings.getSpawnY(worldName), configSettings.getSpawnZ(worldName));
+            return new Location(world, configSettings.getSpawnX(worldName), configSettings.getSpawnY(worldName),
+                    configSettings.getSpawnZ(worldName));
         }
     }
     private class VoidBiomeProvider extends BiomeProvider {

@@ -46,3 +46,5 @@ Biome to use for empty chunks & the default spawn coordinates can be edit in the
 ## Build
 
 Build with `./gradlew assemble`. Plugin file will be in `build/libs/`.
+
+Build for publication with `./gradlew clean zipStagingDeploy`
