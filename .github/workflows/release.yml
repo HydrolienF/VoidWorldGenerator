@@ -1,0 +1,74 @@
+name: Build and Publish Release
+on:
+  push:
+    tags:
+      - '*'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: gradle
+      # Configure Gradle for optimal use in GitHub Actions, including caching of downloaded dependencies.
+      # See: https://github.com/gradle/actions/blob/main/setup-gradle/README.md
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
+      # build
+      - name: Build with Gradle Wrapper
+        run: ./gradlew assemble
+      
+      - name: Get version & release name
+        id: version
+        run: |
+          echo "version=$(./gradlew -q echoVersion)" >> $GITHUB_OUTPUT
+          echo "releaseName=$(./gradlew -q echoReleaseName)" >> $GITHUB_OUTPUT
+      
+      - name: Print version & release name
+        run: |
+          echo "Version: ${{ steps.version.outputs.version }}"
+          echo "Release Name: ${{ steps.version.outputs.releaseName }}"
+
+
+      - name: Create an empty CHANGELOG.md if missing
+        run: |
+          if [ ! -f CHANGELOG.md ]; then
+            touch CHANGELOG.md
+          fi
+
+      - name: Read the first lines of CHANGELOG.md from gradle
+        id: changelog
+        run: |
+          {
+            echo "changelog<<EOF"
+            ./gradlew -q echoLatestVersionChangelog
+            echo "EOF"
+          } >> $GITHUB_OUTPUT
+
+      - name: Create Release
+        id: createRelease
+        uses: ncipollo/release-action@v1.14.0
+        with:
+          allowUpdates: true
+          updateOnlyUnreleased: true
+          artifacts: build/libs/${{ github.event.repository.name }}-${{ steps.version.outputs.version }}.jar
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ steps.version.outputs.version }}
+          name: ${{ steps.version.outputs.releaseName }}
+          body: ${{ steps.changelog.outputs.changelog }}
+          # prerelease: ${{ !startsWith(github.ref, 'refs/tags/') }} #Always release for now
+          skipIfReleaseExists: true
+      
+      - name: Publish to hangar & modrinth
+        env:
+          # Make sure you have added the repository secrets in the repository's settings
+          HANGAR_API_TOKEN: ${{ secrets.HANGAR_API_TOKEN }}
+          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+        run: ./gradlew assemble publishPluginPublicationToHangar
+        # run: ./gradlew assemble publishPluginPublicationToHangar modrinth
