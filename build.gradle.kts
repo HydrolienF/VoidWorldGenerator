@@ -8,10 +8,10 @@ plugins {
 }
 
 group="fr.formiko.mc.voidworldgenerator"
-version="1.3.2"
+version="1.3.3"
 description="Generate empty world."
-val mainMinecraftVersion = "1.21.4"
-val supportedMinecraftVersions = "1.20 - 1.21.4"
+val mainMinecraftVersion = "1.21.6"
+val supportedMinecraftVersions = "1.20 - 1.21.6"
 
 repositories {
     mavenCentral()
