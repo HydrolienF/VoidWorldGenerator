@@ -10,10 +10,10 @@ plugins {
 }
 
 group="fr.formiko.mc.voidworldgenerator"
-version="1.3.5"
+version="1.3.6"
 description="Generate empty world."
-val mainMinecraftVersion = "1.21.6"
-val supportedMinecraftVersions = "1.20 - 1.21.6"
+val mainMinecraftVersion = "1.21.7"
+val supportedMinecraftVersions = "1.20 - 1.21.7"
 
 repositories {
     mavenCentral()
@@ -235,7 +235,7 @@ hangarPublish { // ./gradlew publishPluginPublicationToHangar
 
 // Do an array of game versions from supportedMinecraftVersions
 fun expandMinecraftVersions(range: String): List<String> {
-    val latestPatches = mapOf("1.20" to 6, "1.21" to 6)
+    val latestPatches = mapOf("1.20" to 6, "1.21" to 7)
 
     fun String.toMinorAndPatch() = split('.').let {
         if (it.size == 2) it.joinToString(".") to 0 else "${it[0]}.${it[1]}" to it[2].toInt()
