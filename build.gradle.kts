@@ -10,10 +10,10 @@ plugins {
 }
 
 group="fr.formiko.mc.voidworldgenerator"
-version="1.3.6"
+version="1.3.7"
 description="Generate empty world."
-val mainMinecraftVersion = "1.21.7"
-val supportedMinecraftVersions = "1.20 - 1.21.7"
+val mainMinecraftVersion = "1.21.8"
+val supportedMinecraftVersions = "1.20 - 1.21.8"
 
 repositories {
     mavenCentral()
@@ -235,7 +235,7 @@ hangarPublish { // ./gradlew publishPluginPublicationToHangar
 
 // Do an array of game versions from supportedMinecraftVersions
 fun expandMinecraftVersions(range: String): List<String> {
-    val latestPatches = mapOf("1.20" to 6, "1.21" to 7)
+    val latestPatches = mapOf("1.20" to 6, "1.21" to 8)
 
     fun String.toMinorAndPatch() = split('.').let {
         if (it.size == 2) it.joinToString(".") to 0 else "${it[0]}.${it[1]}" to it[2].toInt()
@@ -265,7 +265,7 @@ tasks.register("echoSupportedMinecraftVersions") {
 
 modrinth {
     token.set(System.getenv("MODRINTH_TOKEN")) // Remember to have the MODRINTH_TOKEN environment variable set or else this will fail - just make sure it stays private!
-    projectId.set("${project.name.toLowerCase()}") // This can be the project ID or the slug. Either will work!
+    projectId.set("${project.name.lowercase()}") // This can be the project ID or the slug. Either will work!
     versionNumber.set("${project.version}") // You don't need to set this manually. Will fail if Modrinth has this version already
     versionType.set("release") // This is the default -- can also be `beta` or `alpha`
     // uploadFile.set(tasks.jar) // With Loom, this MUST be set to `remapJar` instead of `jar`!
