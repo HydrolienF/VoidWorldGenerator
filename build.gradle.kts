@@ -10,10 +10,10 @@ plugins {
 }
 
 group="fr.formiko.mc.voidworldgenerator"
-version="1.3.8"
+version="1.3.9"
 description="Generate empty world."
-val mainMinecraftVersion = "1.21.9"
-val supportedMinecraftVersions = "1.20 - 1.21.9"
+val mainMinecraftVersion = "1.21.10"
+val supportedMinecraftVersions = "1.20 - 1.21.10"
 
 repositories {
     mavenCentral()
@@ -193,7 +193,7 @@ val extractChangelog = tasks.register("extractChangelog") {
     }
 
     // Make changelog accessible from other tasks
-    extensions.add("changelog", changelog)
+    extensions.add(Property::class.java, "changelog", changelog)
 }
 
 tasks.register("echoLatestVersionChangelog") {
@@ -235,7 +235,7 @@ hangarPublish { // ./gradlew publishPluginPublicationToHangar
 
 // Do an array of game versions from supportedMinecraftVersions
 fun expandMinecraftVersions(range: String): List<String> {
-    val latestPatches = mapOf("1.20" to 6, "1.21" to 9)
+    val latestPatches = mapOf("1.20" to 6, "1.21" to 10)
 
     fun String.toMinorAndPatch() = split('.').let {
         if (it.size == 2) it.joinToString(".") to 0 else "${it[0]}.${it[1]}" to it[2].toInt()
