@@ -1,3 +1,6 @@
+import org.jreleaser.model.Active
+import org.jreleaser.model.Signing
+
 plugins {
     id("java")
     id("io.github.goooler.shadow") version "8.1.8"
@@ -7,13 +10,14 @@ plugins {
     id("org.sonarqube") version "5.0.0.4638"
     id("io.papermc.hangar-publish-plugin") version "0.1.3"
     id("com.modrinth.minotaur") version "2.+" // cf https://github.com/modrinth/minotaur
+    id("org.jreleaser") version "1.15.0"
 }
 
 group="fr.formiko.mc.voidworldgenerator"
-version="1.3.9"
+version="1.3.11"
 description="Generate empty world."
-val mainMinecraftVersion = "1.21.10"
-val supportedMinecraftVersions = "1.20 - 1.21.10"
+val mainMinecraftVersion = "1.21.11"
+val supportedMinecraftVersions = "1.20 - 1.21.11"
 
 repositories {
     mavenCentral()
@@ -62,11 +66,11 @@ tasks {
     }
 }
 
-afterEvaluate {
-    tasks.withType(PublishToMavenRepository::class.java) {
-        dependsOn(tasks.assemble)
-    }
-}
+// afterEvaluate {
+//     tasks.withType(PublishToMavenRepository::class.java) {
+//         dependsOn(tasks.assemble)
+//     }
+// }
 
 publishing {
   publications {
@@ -75,6 +79,7 @@ publishing {
 
       artifactId = project.name.lowercase()
       pom {
+        name.set(project.name.lowercase())
         packaging = "jar"
         url.set("https://github.com/HydrolienF/${project.name}")
         inceptionYear.set("2024")
@@ -102,30 +107,32 @@ publishing {
   }
   repositories {
     maven {
-        url = layout.buildDirectory.dir("staging-deploy").get().asFile.toURI()
+        // url = layout.buildDirectory.dir("staging-deploy").get().asFile.toURI()
+        name = "PreDeploy"
+        url = uri(layout.buildDirectory.dir("pre-deploy"))
 
     }
   }
 }
 
-// Custom signing task using gpg -ab
-val signWithGpg = tasks.register("signWithGpg") {
-    dependsOn("publishMavenJavaPublicationToMavenRepository")
-    group = "signing"
-    description = "Sign the publication using gpg -ab"
-    val filesToSign = fileTree("${buildDir}/staging-deploy/${project.group.toString().lowercase().replace('.', '/')}/${project.name.lowercase()}/${project.version}") {
-        include("**/*.jar", "**/*.module", "**/*.pom")
-    }
-    doFirst {
-        filesToSign.forEach { file ->
-            val command = listOf("gpg", "-ab", "--output", "${file.absolutePath}.asc", file.absolutePath)
-            println("Executing command: ${command.joinToString(" ")}")
-            exec {
-                commandLine = command
-            }
-        }
-    }
-}
+// // Custom signing task using gpg -ab
+// val signWithGpg = tasks.register("signWithGpg") {
+//     dependsOn("publishMavenJavaPublicationToMavenRepository")
+//     group = "signing"
+//     description = "Sign the publication using gpg -ab"
+//     val filesToSign = fileTree("${buildDir}/staging-deploy/${project.group.toString().lowercase().replace('.', '/')}/${project.name.lowercase()}/${project.version}") {
+//         include("**/*.jar", "**/*.module", "**/*.pom")
+//     }
+//     doFirst {
+//         filesToSign.forEach { file ->
+//             val command = listOf("gpg", "-ab", "--output", "${file.absolutePath}.asc", file.absolutePath)
+//             println("Executing command: ${command.joinToString(" ")}")
+//             exec {
+//                 commandLine = command
+//             }
+//         }
+//     }
+// }
 
 tasks.register<Zip>("zipStagingDeploy") {
     dependsOn("signWithGpg")
@@ -282,4 +289,42 @@ modrinth {
 
 tasks.named("modrinth") {
     dependsOn(tasks.named("modrinthSyncBody"))
+}
+
+jreleaser {
+    project {
+        name.set("${project.name}")
+        copyright.set("Hydrolien")
+        description.set(findProperty("description")?.toString() ?: "Default description")
+        website.set("https://github.com/HydrolienF/${project.name}")
+    }
+
+    deploy {
+        maven {
+            mavenCentral {
+                create("sonatype") {
+                    active.set(Active.ALWAYS)
+                    url.set("https://central.sonatype.com/api/v1/publisher")
+                    username.set(findProperty("ossrhUsername")?.toString()
+                        ?: System.getenv("OSSRH_USERNAME"))
+                    password.set(findProperty("ossrhPassword")?.toString()
+                        ?: System.getenv("OSSRH_PASSWORD"))
+                    stagingRepository("build/pre-deploy")  // call as function
+
+                    applyMavenCentralRules = false
+                }
+            }
+        }
+    }
+
+    release {
+        github {
+            enabled.set(false)
+        }
+    }
+}
+
+signing {
+    useGpgCmd() // uses local gpg executable
+    sign(publishing.publications["mavenJava"])
 }

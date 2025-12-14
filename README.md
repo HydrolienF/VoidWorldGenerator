@@ -47,4 +47,11 @@ Biome to use for empty chunks & the default spawn coordinates can be edit in the
 
 Build with `./gradlew assemble`. Plugin file will be in `build/libs/`.
 
-Build for publication with `./gradlew clean zipStagingDeploy`
+# Assemble, publish, sign & zip.
+```sh
+./gradlew clean publish
+./gradlew jreleaserDeploy
+```
+The published lib will be available [there](https://central.sonatype.com/publishing).
+
+Push tag to git for github action release to Modrinth & Hangar.
