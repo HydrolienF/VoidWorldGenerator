@@ -45,6 +45,8 @@ Biome to use for empty chunks & the default spawn coordinates can be edit in the
 
 # Build, Test & deploy
 
+Feature requests or pull requests are welcome. Concider creating an issue first to talk about your new feature before sending a pull request.
+
 ## Build
 
 Clone the [repo](https://github.com/HydrolienF/VoidWorldGenerator) `git clone git@github.com:HydrolienF/VoidWorldGenerator.git`
