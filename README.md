@@ -69,7 +69,7 @@ git tag 1.2.3
 git push --tags
 ```
 
-### Maven central
+### to Maven central
 
 *Require ossrhUsername & ossrhPassword in ~/.gradle/gradle.properties*
 
