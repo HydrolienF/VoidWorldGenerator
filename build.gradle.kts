@@ -10,7 +10,7 @@ plugins {
     id("org.sonarqube") version "7.3.0.8198" // Advanced code quality checks
     id("io.papermc.hangar-publish-plugin") version "0.1.4"
     id("com.modrinth.minotaur") version "2.+" // cf https://github.com/modrinth/minotaur
-    id("org.jreleaser") version "1.15.0"
+    id("org.jreleaser") version "1.24.0"
 }
 
 group="fr.formiko.mc.voidworldgenerator"
@@ -115,25 +115,6 @@ publishing {
     }
   }
 }
-
-// // Custom signing task using gpg -ab
-// val signWithGpg = tasks.register("signWithGpg") {
-//     dependsOn("publishMavenJavaPublicationToMavenRepository")
-//     group = "signing"
-//     description = "Sign the publication using gpg -ab"
-//     val filesToSign = fileTree("${buildDir}/staging-deploy/${project.group.toString().lowercase().replace('.', '/')}/${project.name.lowercase()}/${project.version}") {
-//         include("**/*.jar", "**/*.module", "**/*.pom")
-//     }
-//     doFirst {
-//         filesToSign.forEach { file ->
-//             val command = listOf("gpg", "-ab", "--output", "${file.absolutePath}.asc", file.absolutePath)
-//             println("Executing command: ${command.joinToString(" ")}")
-//             exec {
-//                 commandLine = command
-//             }
-//         }
-//     }
-// }
 
 tasks.register<Zip>("zipStagingDeploy") {
     dependsOn("signWithGpg")
