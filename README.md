@@ -47,6 +47,8 @@ Biome to use for empty chunks & the default spawn coordinates can be edit in the
 
 ## Build
 
+Clone the [repo](https://github.com/HydrolienF/VoidWorldGenerator) `git clone git@github.com:HydrolienF/VoidWorldGenerator.git`
+
 Build with `./gradlew assemble`. The plugin .jar file will be in `build/libs/`.
 
 ## Test
