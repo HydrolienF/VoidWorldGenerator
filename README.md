@@ -52,6 +52,6 @@ Build with `./gradlew assemble`. Plugin file will be in `build/libs/`.
 ./gradlew clean publish
 ./gradlew jreleaserDeploy
 ```
-The published lib will be available [there](https://central.sonatype.com/publishing).
+The published lib will be available [on maven central](https://central.sonatype.com/artifact/fr.formiko.mc.voidworldgenerator/voidworldgenerator).
 
 Push tag to git for github action release to Modrinth & Hangar.
