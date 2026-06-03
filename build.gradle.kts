@@ -35,6 +35,14 @@ java {
     withSourcesJar()
 }
 
+sonar {
+  properties {
+    property("sonar.projectKey", project.name)
+    property("sonar.projectName", project.name)
+    property("sonar.host.url", "https://mvndisonar.formiko.fr")
+  }
+}
+
 tasks {
     shadowJar {
         relocate("org.bstats","${project.group}.bstats")
