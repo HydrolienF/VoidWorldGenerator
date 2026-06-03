@@ -57,7 +57,7 @@ You might want to update the plugin config to fit your needs.
 
 ## Deploy
 
-### To Github releases, Hangar and Modrinth
+### To Github releases, Hangar & Modrinth
 
 Push tag to git to trigger a github action release that will create a new Github release and publish to Hangar & Modrinth.
 ```sh
