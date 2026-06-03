@@ -1,6 +1,3 @@
-import org.jreleaser.model.Active
-import org.jreleaser.model.Signing
-
 plugins {
     id("java")
     id("com.gradleup.shadow") version "9.4.1"
@@ -340,7 +337,7 @@ jreleaser {
         maven {
             mavenCentral {
                 create("sonatype") {
-                    active.set(Active.ALWAYS)
+                    active.set(org.jreleaser.model.Active.ALWAYS)
                     url.set("https://central.sonatype.com/api/v1/publisher")
                     username.set(findProperty("ossrhUsername")?.toString()
                         ?: System.getenv("OSSRH_USERNAME"))
