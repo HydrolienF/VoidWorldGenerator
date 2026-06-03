@@ -43,15 +43,34 @@ Biome to use for empty chunks & the default spawn coordinates can be edit in the
 ## Statistics
 [![bStats Graph Data](https://bstats.org/signatures/bukkit/VoidWorldGenerator.svg)](https://bstats.org/plugin/bukkit/VoidWorldGenerator/20171)
 
+# Build, Test & deploy
+
 ## Build
 
-Build with `./gradlew assemble`. Plugin file will be in `build/libs/`.
+Build with `./gradlew assemble`. The plugin .jar file will be in `build/libs/`.
 
-# Assemble, publish, sign & zip.
+## Test
+
+You can test the plugin directly in a Minecraft server with `./gradlew runServer`.
+You can also try it on an other server by placing the .jar in `plugins/`.
+You might want to update the plugin config to fit your needs.
+
+## Deploy
+
+### To Github releases, Hangar and Modrinth
+
+Push tag to git to trigger a github action release that will create a new Github release and publish to Hangar & Modrinth.
+```sh
+git tag 1.2.3
+git push --tags
+```
+
+### Maven central
+
+*Require ossrhUsername & ossrhPassword in ~/.gradle/gradle.properties*
+
 ```sh
 ./gradlew clean publish
 ./gradlew jreleaserDeploy
 ```
 The published lib will be available [on maven central](https://central.sonatype.com/artifact/fr.formiko.mc.voidworldgenerator/voidworldgenerator).
-
-Push tag to git for github action release to Modrinth & Hangar.
