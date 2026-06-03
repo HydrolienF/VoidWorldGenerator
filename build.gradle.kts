@@ -121,14 +121,6 @@ publishing {
   }
 }
 
-tasks.register<Zip>("zipStagingDeploy") {
-    dependsOn("signWithGpg")
-    dependsOn("publishMavenJavaPublicationToMavenRepository")
-    from(layout.buildDirectory.dir("staging-deploy"))
-    archiveFileName.set("staging-deploy-${project.name}-${project.version}.zip")
-    destinationDirectory.set(layout.buildDirectory)
-}
-
 tasks.register("echoVersion") {
     doLast {
         println("${project.version}")
