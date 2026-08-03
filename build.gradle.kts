@@ -14,7 +14,7 @@ group="fr.formiko.mc.voidworldgenerator"
 version="1.3.12"
 description="Generate empty world."
 val mainMinecraftVersion = "1.21.11" // 26.1.2
-val supportedMinecraftVersions = "1.20 - 26.1.2"
+val supportedMinecraftVersions = "1.20 - 26.2"
 
 repositories {
     mavenCentral()
@@ -225,7 +225,8 @@ fun expandMinecraftVersions(range: String): List<String> {
     val latestPatches = linkedMapOf(
         "1.20" to 6,
         "1.21" to 11,
-        "26.1" to 2
+        "26.1" to 2,
+        "26.2" to 0
     )
 
     data class Version(
