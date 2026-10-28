@@ -3,7 +3,7 @@ plugins {
     id("com.gradleup.shadow") version "9.4.1"
     id("maven-publish")
     signing // Add ./gradlew signArchives
-    id("xyz.jpenilla.run-paper") version "3.0.2" // Paper server for testing/hotloading JVM
+    id("xyz.jpenilla.run-paper") version "3.1.0" // Paper server for testing/hotloading JVM
     id("org.sonarqube") version "7.3.0.8198" // Advanced code quality checks
     id("io.papermc.hangar-publish-plugin") version "0.1.4"
     id("com.modrinth.minotaur") version "2.+" // cf https://github.com/modrinth/minotaur
@@ -11,7 +11,7 @@ plugins {
 }
 
 group="fr.formiko.mc.voidworldgenerator"
-version="1.3.14"
+version="1.3.15"
 description="Generate empty world."
 val mainMinecraftVersion = "1.21.11" // 26.3
 val supportedMinecraftVersions = "1.20 - 26.3"
